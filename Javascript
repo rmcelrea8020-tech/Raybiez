@@ -1,0 +1,234 @@
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function chance(p) {
+  return Math.random() < p;
+}
+
+const tribes = [
+  "SkyWing", "SeaWing", "IceWing", "NightWing", "RainWing",
+  "SandWing", "MudWing", "SilkWing", "HiveWing", "LeafWing", "BeetleWing"
+];
+
+const ages = [
+  "Dragonet", "Young Dragon", "Adult", "Older Adult", "Elder"
+];
+
+const genders = [
+  "He/Him",
+  "She/Her",
+  "They/Them",
+  "It/Its",
+  "Genderfluid",
+  "Agender"
+];
+
+const variants = {
+
+  SkyWing: ["MountainWing", "EmberWing", "AshWing", "PyreWing", "LavaWing", "GaleWing", "SunWing", "StormWing", "CliffWing"],
+
+  SeaWing: ["RiverWing", "SirenWing", "DeepWing", "TideWing", "ReefWing", "RippleWing", "MistWing", "TsunamiWing"],
+
+  IceWing: ["FrostWing", "BlizzardWing", "CrystalWing", "DeerWing", "Articwing"],
+
+  NightWing: ["StarWing", "MoonWing", "ShadowWing", "TwilightWing", "DuskWing", "DawnWing"],
+
+  RainWing: ["ForestWing", "SavannaWing", "FruitWing", "SwampWing", "MangroveWing"],
+
+  SandWing: ["DuneWing", "ViperWing", "ScorpionWing", "SerpentWing", "BoneWing", "DustWing"],
+
+  MudWing: ["RockWing", "CanyonWing", "MarshWing", "ClayWing", "MesaWing"],
+
+  SilkWing: ["MothWing", "SpiderWing", "MantisWing", "DragonflyWing", "ButterflyWing"],
+
+  HiveWing: ["HoneyWing", "BeeWing", "HornetWing", "AntWing", "WaspWing"],
+
+  LeafWing: ["BloomWing", "PetalWing", "TreeWing", "ThornWing", "MossWing"],
+
+  BeetleWing: ["ScarabWing", "WaterbugWing"]
+
+};
+
+const universalMutations = [
+
+  { name: "Heterochromia", desc: "different colored eyes." },
+
+  { name: "Gigantism", desc: "Dragon is far larger than normal." },
+
+  { name: "Dwarfism", desc: "Dragon is far smaller than normal." },
+
+  { name: "Albino", desc: "White/pale scales with red eyes." },
+
+  { name: "Melanistic", desc: "Scales are extremely dark." },
+
+  { name: "Big Wings", desc: "Wings are larger than usual." },
+
+  { name: "Small Wings", desc: "Wings are smaller than normal." },
+
+  { name: "Four Wings", desc: "Dragon has two pairs of wings." },
+
+  { name: "Polydactyl", desc: "Extra claws. " }
+
+];
+
+const tribeMutations = {
+
+  SkyWing: [
+    { name: "Blue Fire", desc: "Fire breath is much hotter, and glows blue." },
+    { name: "Firescales", desc: "Scales burn anything they touch." },
+    { name: "Emberscales", desc : "Has no fire breath, paler than normal." },
+    { name: "Sunscales", desc: "Scales glow yellow, scales are warmer than normal, and uses light blasts/breath instead of fire." }
+  ],
+
+  SeaWing: [
+    { name: "Glowscales", desc: "More Bioluminescent scales than normal." },
+    { name: "Currentseer", desc: "Can see and control water currents." },
+    { name: "Deepscales", desc : "Darker colored scales, cannot breathe on land." },
+    { name: "Frill gills", desc : "Axolotl-like gills."},
+    { name: "Freshscales", desc : "Can only swim in fresh water, paler scales."},
+    
+
+  ],
+
+  NightWing: [
+    { name: "Mindreader", desc: "Can hear nearby thoughts of others." },
+    { name: "Futureseer", desc: "Has visions of future events." }
+  ],
+
+  RainWing: [
+    { name: "Glowscales", desc: "Can glow brightly." },
+    { name: "Leafspeak", desc: "Can communicate with plants." }
+  ],
+
+  SandWing: [
+    { name: "Sandseer", desc: "Can manipulate sand." }
+  ],
+
+  MudWing: [
+    { name: "Animalspeak", desc: "Can speak with animals." }
+  ],
+
+  SilkWing: [
+    { name: "Flamesilk", desc: "Silk is extremely hot." }
+  ],
+
+  HiveWing: [
+    { name: "Toxic Blood", desc: "Blood is venomous." }
+  ],
+
+  LeafWing: [
+    { name: "Toxinscales", desc: "Scales release paralyzing toxins." }
+  ]
+
+};
+
+const hybridMutations = [
+
+  { name: "Split Breath", desc: "Dragon can use multiple breath attacks." },
+
+  { name: "Mixed Patterns", desc: "Scale patterns from multiple tribes." },
+
+  { name: "Ultra Chimerism", desc: "Body split between different tribe traits." }
+
+];
+
+function getVariant(tribe) {
+
+  if (chance(.3)) return "None";
+
+  return random(variants[tribe] || ["None"]);
+
+}
+
+function generateDragon() {
+
+  let typeRoll = Math.random();
+
+  let type = "Pure";
+
+  let tribe1 = random(tribes);
+
+  let tribe2 = null;
+
+  if (typeRoll < 0.55) {
+
+    type = "Pure";
+
+  }
+
+  else if (typeRoll < 0.9) {
+
+    type = "Hybrid";
+
+    tribe2 = random(tribes);
+
+  }
+
+  else {
+
+    type = "Tribred";
+
+    tribe2 = random(tribes);
+
+  }
+
+  let tribeText = tribe1;
+
+  if (tribe2) tribeText += " + " + tribe2;
+
+  let variant = getVariant(tribe1);
+
+  let age = random(ages);
+
+  let gender = random(genders);
+
+  let mutationRoll = Math.random();
+
+  let mutationCount = 0;
+
+  if (mutationRoll < 0.4) mutationCount = 0;
+
+  else if (mutationRoll < 0.7) mutationCount = 1;
+
+  else if (mutationRoll < 0.9) mutationCount = 2;
+
+  else mutationCount = 3;
+
+  let pool = [...universalMutations];
+
+  if (tribeMutations[tribe1]) pool = pool.concat(tribeMutations[tribe1]);
+
+  if (type != "Pure") pool = pool.concat(hybridMutations);
+
+  let chosen = [];
+
+  for (let i = 0; i < mutationCount; i++) {
+
+    chosen.push(random(pool));
+
+  }
+
+  let html = "";
+
+  chosen.forEach(m => {
+
+    html += `<div class="mutation"><b>${m.name}</b> — ${m.desc}</div>`;
+
+  });
+
+  if (html === "") html = "None";
+
+  document.getElementById("tribe").innerText = tribeText;
+
+  document.getElementById("type").innerText = type;
+
+  document.getElementById("subspecies").innerText = variant;
+
+  document.getElementById("age").innerText = age;
+
+  document.getElementById("gender").innerText = gender;
+
+  document.getElementById("mutations").innerHTML = html;
+
+}
