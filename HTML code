@@ -1,0 +1,29 @@
+<div class="container">
+
+	<h1>Dragon Generator</h1>
+
+	<button onclick="generateDragon()">Generate Dragon</button>
+
+	<div id="dragonCard" class="dragonCard">
+
+		<div class="row"><b>Tribe</b><span id="tribe"></span></div>
+
+		<div class="row"><b>Type</b><span id="type"></span></div>
+
+		<div class="row"><b>Subspecies</b><span id="subspecies"></span></div>
+
+		<div class="row"><b>Age</b><span id="age"></span></div>
+
+		<div class="row"><b>Gender</b><span id="gender"></span></div>
+
+		<div class="mutationBox">
+
+			<b>Mutations</b>
+
+			<div id="mutations"></div>
+
+		</div>
+
+	</div>
+
+</div>
